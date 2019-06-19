@@ -3,13 +3,6 @@ import React from "react";
 import File from "./icons/File";
 import FileUpload from "./icons/FileUpload";
 import Book from "./icons/Book";
-const showNav = {
-  transform: "translateX(0%)"
-};
-
-const hideNav = {
-  transform: "translateX(-100%)"
-};
 
 const SideBar = props => {
   let navStyle = "sidebar";
@@ -33,7 +26,7 @@ const SideBar = props => {
             onClick={() => {
               props.showPdf(item.id);
             }}
-            className="list-items"
+            className={props.activeId === item.id ? "list-items active" : "list-items"}
           >
             <File setClass={true} />
             <div className="file-name">

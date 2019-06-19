@@ -3,6 +3,8 @@ import PdfViewer from "./components/PdfViewer";
 import SideBar from "./components/Sidebar";
 import EmptyPlaceholder from "./components/EmptyPlaceholder";
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 var fileReader,
   file,
   fileName,
@@ -22,43 +24,44 @@ export default class componentName extends Component {
     numPages: null,
     pageNumber: 1,
     pdfArr: [],
-    showSideBar: false
+    showSideBar: false,
+    activeId: 1
   };
 
   //file upload handler
   changeHandler = event => {
-    let message = "";
     try {
       if (typeof window.FileReader !== "function")
-        message += "The file API isn't supported on this browser.";
+        throw "The file API isn't supported on this browser.";
       let input = event.target;
       if (!input)
-        message += "The browser does not properly implement the event object";
+        throw "The browser does not properly implement the event object";
       if (!input.files)
-        message +=
-          "This browser does not support the `files` property of the file input.";
+        throw "This browser does not support the `files` property of the file input.";
       if (!input.files[0]) return undefined;
 
+      // if file type is not pdf do not accept it
       if (input.files[0].type === "application/pdf") {
         file = event.target.files[0];
         fileName = file.name;
         this.getFile(event);
       } else {
-        // window.alert("Please upload pdf or txt files only");
-        message += "Please upload pdf or txt files only";
+        throw "Please upload pdf files only";
       }
-    } catch {
-      // console.log(err, " error");
-      window.alert(message);
+    } catch (error) {
+      // show toast
+      toast.error(error, {
+        position: toast.POSITION.TOP_CENTER
+      });
     }
   };
 
-  // get original file
-  getFile = event => {
+  // get original file in base64 format
+  getFile = () => {
     fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onloadend = event => {
-      console.log(event);
+      // console.log(event);
       let prevPdfArr = [...this.state.pdfArr];
       let result = event.target.result;
       let title = `Document 0${counter}`;
@@ -66,16 +69,31 @@ export default class componentName extends Component {
         ...prevPdfArr,
         { name: fileName, fileContent: result, id: counter, title: title }
       ];
-      counter++;
-      this.setState({
-        fileContent: result,
-        upload: true,
-        pdfArr: prevPdfArr,
-        title: title
-      });
+      this.setState(
+        {
+          fileContent: result,
+          upload: true,
+          pdfArr: prevPdfArr,
+          title: title,
+          activeId: counter
+        },
+        () => {
+          counter++;
+          toast.success(
+            "Hey, Cheers! Your file has been uploaded successfully.",
+            {
+              position: toast.POSITION.TOP_CENTER
+            }
+          );
+          if (!isLargeDevice) {
+            this.hideSideBar();
+          }
+        }
+      );
     };
   };
 
+  // show page numbers after doc is uploaded
   onDocumentLoadSuccess = document => {
     const { numPages } = document;
     this.setState({
@@ -93,13 +111,22 @@ export default class componentName extends Component {
 
   nextPage = () => this.changePage(1);
 
+  // show selected pdf
   showPdf = id => {
     let arr = this.state.pdfArr;
     let findPdfData = arr.find(item => item.id === id);
-    this.setState({
-      fileContent: findPdfData.fileContent,
-      title: findPdfData.title
-    });
+    this.setState(
+      {
+        fileContent: findPdfData.fileContent,
+        title: findPdfData.title,
+        activeId: id
+      },
+      () => {
+        if (!isLargeDevice) {
+          this.hideSideBar();
+        }
+      }
+    );
   };
 
   toggleSideBar = () => {
@@ -108,6 +135,7 @@ export default class componentName extends Component {
     });
   };
 
+  // hide side bar on click of side content
   hideSideBar = () => {
     this.setState({
       showSideBar: false
@@ -122,7 +150,8 @@ export default class componentName extends Component {
       upload,
       pdfArr,
       title,
-      showSideBar
+      showSideBar,
+      activeId
     } = this.state;
     let data = {
       pageNumber,
@@ -130,7 +159,7 @@ export default class componentName extends Component {
       fileContent,
       title
     };
-    console.log(isLargeDevice);
+    // console.log(isLargeDevice);
     return (
       <div className="main-content">
         {!isLargeDevice && (
@@ -146,6 +175,7 @@ export default class componentName extends Component {
           pdfArr={pdfArr}
           showSideBar={showSideBar}
           isLargeDevice={isLargeDevice}
+          activeId={activeId}
         />
         <main className="main" onClick={this.hideSideBar}>
           {upload ? (
@@ -159,6 +189,7 @@ export default class componentName extends Component {
             <EmptyPlaceholder />
           )}
         </main>
+        <ToastContainer />
       </div>
     );
   }
