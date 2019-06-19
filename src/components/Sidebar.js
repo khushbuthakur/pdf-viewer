@@ -3,9 +3,25 @@ import React from "react";
 import File from "./icons/File";
 import FileUpload from "./icons/FileUpload";
 import Book from "./icons/Book";
+const showNav = {
+  transform: "translateX(0%)"
+};
+
+const hideNav = {
+  transform: "translateX(-100%)"
+};
+
 const SideBar = props => {
+  let navStyle = "sidebar";
+
+  if (!props.isLargeDevice) {
+    if (props.showSideBar) {
+      navStyle = "sidebar open";
+    }
+  }
+
   return (
-    <aside className="sidebar">
+    <aside className={navStyle}>
       <h2 className="title">
         <Book /> Reader Zone
       </h2>

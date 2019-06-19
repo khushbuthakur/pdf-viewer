@@ -7,13 +7,22 @@ var fileReader,
   file,
   fileName,
   counter = 1;
+
+let isLargeDevice = true;
+
+if (window.innerWidth > 992 || window.outerWidth > 992) {
+  isLargeDevice = true;
+} else {
+  isLargeDevice = false;
+}
 export default class componentName extends Component {
   state = {
     fileContent: null,
     upload: false,
     numPages: null,
     pageNumber: 1,
-    pdfArr: []
+    pdfArr: [],
+    showSideBar: false
   };
 
   //file upload handler
@@ -93,6 +102,18 @@ export default class componentName extends Component {
     });
   };
 
+  toggleSideBar = () => {
+    this.setState({
+      showSideBar: !this.state.showSideBar
+    });
+  };
+
+  hideSideBar = () => {
+    this.setState({
+      showSideBar: false
+    });
+  };
+
   render() {
     const {
       pageNumber,
@@ -100,7 +121,8 @@ export default class componentName extends Component {
       fileContent,
       upload,
       pdfArr,
-      title
+      title,
+      showSideBar
     } = this.state;
     let data = {
       pageNumber,
@@ -108,14 +130,24 @@ export default class componentName extends Component {
       fileContent,
       title
     };
+    console.log(isLargeDevice);
     return (
       <div className="main-content">
+        {!isLargeDevice && (
+          <div className="menu" onClick={this.toggleSideBar}>
+            <div className="menu_line menu_line_one" />
+            <div className="menu_line menu_line_two" />
+            <div className="menu_line menu_line_three" />
+          </div>
+        )}
         <SideBar
           changeHandler={this.changeHandler}
           showPdf={this.showPdf}
           pdfArr={pdfArr}
+          showSideBar={showSideBar}
+          isLargeDevice={isLargeDevice}
         />
-        <main className="main">
+        <main className="main" onClick={this.hideSideBar}>
           {upload ? (
             <PdfViewer
               data={data}

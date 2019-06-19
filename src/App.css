@@ -1,183 +1,269 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
-.main-content {
-  display: flex;
-  justify-content: center;
-}
-.sidebar {
-  width: 20vw;
-  height: 100vh;
-  background-color: #070d59;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  padding: 2vw;
-  position: relative;
-}
-
-.main {
-  width: 80vw;
-  height: 100vh;
-  text-align: center;
-}
-ul {
-  list-style: none;
-}
-
-.title {
-  text-align: center;
-  font-size : 2em;
-  margin : 5vh auto;
-}
-
-.book-icon{
-  height : 1em;
-  transform: translateY(5px);
-}
-
-input[type="file"] {
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  /* top: 0; */
-  bottom: 0;
-  width: 100%;
-}
-
-div.input-file {
-  position: absolute;
-  bottom: 3vh;
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f7b633;
-  border-radius: 5px;
-  height: 50px;
-  font-size: 22px;
-  cursor : pointer;
-}
-
-div.input-file:hover{
-  background: #e09a0f;
-  transition: all 0.5s ease-in-out;
-
-}
-
-label.file-upload {
-  display: inline-block;
-  height: 50px;
-  cursor : pointer;
-}
-
-#upload-icon {
-  height: 25px;
-  margin-right: 10px;
-  transform: translateY(-2px);
-}
-
-.file-icon {
-  height: 1em;
-}
-
-/* .pdf-list{
-  transform: translateX(20px);
-} */
-
-.list-items{
-  padding: 10px;
-    margin: 20px auto;
-    background: #f5f8fb36;
-    border-radius: 5px;
-    cursor: pointer;
+  * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+  }
+  .sidebar {
+    width: 20vw;
+    height: 100vh;
+    background-color: #070d59;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
     position: relative;
+  }
+
+  .main {
+    width: 80vw;
+    height: 100vh;
+    text-align: center;
+  }
+  ul {
+    list-style: none;
+  }
+
+  .title {
+    text-align: center;
+    font-size : 2em;
+    margin : 5vh auto;
+  }
+
+  .book-icon{
+    height : 1em;
+    transform: translateY(5px);
+  }
+
+  input[type="file"] {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    /* top: 0; */
+    bottom: 0;
+    width: 100%;
+  }
+
+  div.input-file {
+    position: absolute;
+    bottom: 3vh;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7b633;
+    border-radius: 5px;
+    height: 50px;
+    font-size: 22px;
+    cursor : pointer;
+  }
+
+  div.input-file:hover{
+    background: #e09a0f;
+    transition: all 0.5s ease-in-out;
+
+  }
+
+  label.file-upload {
+    display: inline-block;
+    height: 50px;
+    cursor : pointer;
+  }
+
+  #upload-icon {
+    height: 25px;
+    margin-right: 10px;
+    transform: translateY(-2px);
+  }
+
+  .file-icon {
+    height: 1em;
+  }
+
+  /* .pdf-list{
+    transform: translateX(20px);
+  } */
+
+  .list-items{
+    padding: 10px;
+      margin: 20px auto;
+      background: #f5f8fb36;
+      border-radius: 5px;
+      cursor: pointer;
+      position: relative;
+  }
+
+  .left{
+    text-align: left
+  }
+
+  .list-file-icon{
+    position: absolute;
+    top : 10px;
+    height: 20px;
+  }
+  .list-items:hover{
+    background-color: #f5f8fb5c;
+    transition: all 0.5s ease;
+  }
+
+  .file-title{
+    font-size: 18px;
+    color : #4A4E86;
+  }
+
+  .empty-place-holder{
+    width : 30vw;
+  }
+
+
+  .placeholder-container{
+    height : 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .pdf-container{
+    max-height : 100vh;
+  }
+
+  body::-webkit-scrollbar-track
+  {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+  }
+
+  body::-webkit-scrollbar
+  {
+    width: 10px;
+    background-color: #F5F5F5;
+  }
+
+  body::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-image: -webkit-gradient(linear,
+                      left bottom,
+                      left top,
+                      color-stop(0.44, #4A4E86),
+                      color-stop(0.72, #4A4E86),
+                      color-stop(0.86, #4A4E86));
+  }
+
+  .button {
+    background-color: #fff; 
+    box-shadow: 5px 5px 5px gainsboro;
+    border: none;
+    color: #4A4E86;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin : auto 10px;
+  }
+
+  .file-name {
+    transform: translateX(35px);
+  }
+
+  .pdf-main-title{
+    padding-top: 20px;
+      margin-left: 20px;
+      text-align: left;
+      font-size: 2em;
+  }
+
+  @media (max-width : 992px){
+    .sidebar{
+      position: absolute;
+      height: 100vh;
+      width: 80vw;
+      z-index: 999;
+      left: 0;
+      bottom: 0;
+      transform: translateX(-100%);
+      transition: translate 0.5s ease;
+    }
+
+    .sidebar.open{
+      position: absolute;
+      height: 100vh;
+      width: 80vw;
+      z-index: 999;
+      left: 0;
+      bottom: 0;
+      transform: translateX(0%);
+      transition: translate 0.5s ease;
+    }
+
+    .main {
+      width: 100vw;
+      height: 100vh;
+      text-align: center;
+    }
+
+    ul{
+      padding-inline-start: 10px;
+    }
+
+    .pdf-main-title {
+      padding-top: 20px;
+      margin-left: 20px;
+      text-align: center;
+      font-size: 1.5em;
+  }
+
+  .title {
+    text-align: center;
+    font-size : 1.5em;
+    margin : 5vh auto;
+  }
+
+  div.input-file {
+    left: 5%;
+    position: absolute;
+    bottom: 3vh;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7b633;
+    border-radius: 5px;
+    height: 50px;
+    font-size: 22px;
+    cursor: pointer;
+}
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    cursor: pointer;
+    padding: 20px 10px;
+    height: 20px;
+    position: absolute;
+    left: 0px;
+}
+.menu_line {
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    width: 30px;
+}
+.menu_line_two {
+    margin-top: 5px;
 }
 
-.left{
-  text-align: left
-}
-
-.list-file-icon{
-  position: absolute;
-  top : 10px;
-  height: 20px;
-}
-.list-items:hover{
-  background-color: #f5f8fb5c;
-  transition: all 0.5s ease;
-}
-
-.file-title{
-  font-size: 18px;
-  color : #4A4E86;
-}
-
-.empty-place-holder{
-  width : 30vw;
-}
-
-
-.placeholder-container{
-  height : 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.pdf-container{
-  max-height : 100vh;
-}
-
-body::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-	border-radius: 10px;
-}
-
-body::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
-}
-
-body::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-image: -webkit-gradient(linear,
-									   left bottom,
-									   left top,
-									   color-stop(0.44, #4A4E86),
-									   color-stop(0.72, #4A4E86),
-									   color-stop(0.86, #4A4E86));
-}
-
-.button {
-  background-color: #fff; 
-  box-shadow: 5px 5px 5px gainsboro;
-  border: none;
-  color: #4A4E86;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
-  margin : auto 10px;
-}
-
-.file-name {
-  transform: translateX(35px);
-}
-
-.pdf-main-title{
-  padding-top: 20px;
-    margin-left: 20px;
-    text-align: left;
-    font-size: 2em;
+.menu_line_three {
+    margin-top: 5px;
 }
